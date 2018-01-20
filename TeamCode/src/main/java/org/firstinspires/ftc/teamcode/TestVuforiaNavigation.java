@@ -37,6 +37,7 @@ import com.qualcomm.robotcore.util.RobotLog;
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.matrices.MatrixF;
 import org.firstinspires.ftc.robotcore.external.matrices.OpenGLMatrix;
+import org.firstinspires.ftc.robotcore.external.matrices.VectorF;
 import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesOrder;
 import org.firstinspires.ftc.robotcore.external.navigation.AxesReference;
@@ -297,6 +298,8 @@ public class TestVuforiaNavigation extends LinearOpMode {
 
         while (opModeIsActive()) {
 
+            boolean truth = false;
+
             for (VuforiaTrackable trackable : allTrackables) {
                 /**
                  * getUpdatedRobotLocation() will return null if no new information is available since
@@ -309,16 +312,31 @@ public class TestVuforiaNavigation extends LinearOpMode {
                 if (robotLocationTransform != null) {
                     lastLocation = robotLocationTransform;
                 }
+
+                OpenGLMatrix targetPose = ((VuforiaTrackableDefaultListener) trackable.getListener()).getPose();
+                VectorF translation = targetPose.getTranslation();
+                double degree = Math.toDegrees(Math.atan2(translation.get(1), translation.get(2)));
+
+                if (degree >= 45){
+                    truth = true;
+                }
+
+                telemetry.addData("degreeInRange?", truth);
+                telemetry.update();
             }
             /**
              * Provide feedback as to where the robot was last located (if we know).
              */
+
+
+
             if (lastLocation != null) {
                 //  RobotLog.vv(TAG, "robot=%s", format(lastLocation));
                 telemetry.addData("Pos", format(lastLocation));
             } else {
                 telemetry.addData("Pos", "Unknown");
             }
+
             telemetry.update();
         }
     }
