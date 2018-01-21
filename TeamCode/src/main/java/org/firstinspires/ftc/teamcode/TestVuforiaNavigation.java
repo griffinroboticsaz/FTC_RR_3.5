@@ -30,7 +30,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.util.RobotLog;
 
@@ -80,6 +79,23 @@ import java.util.List;
  * IMPORTANT: In order to use this OpMode, you need to obtain your own Vuforia license key as
  * is explained below.
  */
+
+enum axis{
+    X (0), Y(1), Z(2);
+    private int value;
+    axis(int value) {
+        this.value = value;
+    }
+    static int X(){
+        return X.value;
+    }
+    static int Y(){
+        return Y.value;
+    }
+    static int Z(){
+        return Z.value;
+    }
+}
 
 @Autonomous(name="Concept: Vuforia Navigation", group ="Concept")
 //@Disabled
@@ -312,17 +328,23 @@ public class TestVuforiaNavigation extends LinearOpMode {
                 if (robotLocationTransform != null) {
                     lastLocation = robotLocationTransform;
                 }
-
-                OpenGLMatrix targetPose = ((VuforiaTrackableDefaultListener) trackable.getListener()).getPose();
-                VectorF translation = targetPose.getTranslation();
-                double degree = Math.toDegrees(Math.atan2(translation.get(1), translation.get(2)));
-
-                if (degree >= 45){
-                    truth = true;
+                try {
+                    /*Grab the last known location
+                    If the last known location is not null */
+                    if(lastLocation != null) {
+                        /*Grab the translation vector and calculate the angle for each plane*/
+                        VectorF translation = lastLocation.getTranslation();
+                        double degreeXY = Math.toDegrees(Math.atan2(translation.get(axis.X()), translation.get(axis.Y())));
+                        double degreeXZ = Math.toDegrees(Math.atan2(translation.get(axis.X()), translation.get(axis.Z())));
+                        double degreeYZ = Math.toDegrees(Math.atan2(translation.get(axis.Y()), translation.get(axis.Z())));
+                        /*add angle data to the telemetry*/
+                        telemetry.addData("AngleXY", degreeXY);
+                        telemetry.addData("AngleXZ", degreeXZ);
+                        telemetry.addData("AngleYZ", degreeYZ);
+                    }
+                    }catch(NullPointerException NPE){
+                        telemetry.addData("Error", NPE.toString());
                 }
-
-                telemetry.addData("degreeInRange?", truth);
-                telemetry.update();
             }
             /**
              * Provide feedback as to where the robot was last located (if we know).
