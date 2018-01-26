@@ -60,8 +60,8 @@ public class Autonomous_OpMode extends LinearCustomOpMode {
 
         waitForStart();
         runtime.reset();
-        ColorSensor sensor = robot.getColorSensor();
-        sensor.enableLed(false);
+        //ColorSensor sensor = robot.getColorSensor();
+        //sensor.enableLed(false);
 
        /* while (opModeIsActive()){
             int rColor = robot.getColorSensor().red();

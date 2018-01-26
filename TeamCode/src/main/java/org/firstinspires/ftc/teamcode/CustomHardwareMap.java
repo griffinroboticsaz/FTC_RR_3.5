@@ -62,15 +62,15 @@ public class CustomHardwareMap {
     public DcMotor lift = null;
     public DcMotor rot = null;
 
-    public CRServo leftFeeder = null;
-    public CRServo rightFeeder = null;
+    public DcMotor leftFeeder = null;
+    public DcMotor rightFeeder = null;
 
     public Servo arm = null;
     public Servo colorServo = null;
 
     public BNO055IMU gyroscope = null;
 
-    public ColorSensor colorSensor = null;
+    //public ColorSensor colorSensor = null;
 
     public static final double MID_SERVO = 0.5;
 
@@ -102,19 +102,19 @@ public class CustomHardwareMap {
         left = hwMap.get(DcMotor.class, "left");
         right = hwMap.get(DcMotor.class, "right");
         lift = hwMap.get(DcMotor.class, "lift");
-        leftFeeder = hwMap.get(CRServo.class, "leftFeeder");
-        rightFeeder = hwMap.get(CRServo.class, "rightFeeder");
-        colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
+        leftFeeder = hwMap.get(DcMotor.class, "leftFeeder");
+        rightFeeder = hwMap.get(DcMotor.class, "rightFeeder");
+        //colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
         colorServo = hwMap.get(Servo.class, "colorServo");
         arm = hwMap.get(Servo.class, "arm");
         rot = hwMap.get(DcMotor.class, "rot");
 
-        BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+       /* BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES; //changed from radians
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
 
         gyroscope = hwMap.get(BNO055IMU.class, "imu");
-        gyroscope.initialize(parameters);
+        gyroscope.initialize(parameters);*/
 
         left.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
         right.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
@@ -161,11 +161,11 @@ public class CustomHardwareMap {
         return rot;
     }
 
-    public CRServo getLeftFeeder() {
+    public DcMotor getLeftFeeder() {
         return leftFeeder;
     }
 
-    public CRServo getRightFeeder() {
+    public DcMotor getRightFeeder() {
         return rightFeeder;
     }
 
@@ -175,8 +175,7 @@ public class CustomHardwareMap {
 
     public Servo getColorServo() { return colorServo; }
 
-    public ColorSensor getColorSensor() {
-        return colorSensor;
+    //public ColorSensor getColorSensor() {
+        //return colorSensor;
     }
-}
 

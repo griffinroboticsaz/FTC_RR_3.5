@@ -60,18 +60,18 @@ public class MovementTest extends LinearCustomOpMode {
 
         waitForStart();
         runtime.reset();
-        ColorSensor sensor = robot.getColorSensor();
+        //ColorSensor sensor = robot.getColorSensor();
 
         MovementLib.lowerCServo(this);
         sleep(100);
         double result = 0;
         for (int i = 0; i < 50 ; i++) {
-            int rColor = sensor.red();
-            int bColor = sensor.blue();
-            telemetry.addData("Blue", bColor);
-            telemetry.addData("Red", rColor);
-            telemetry.update();
-            result += rColor;
+            //int rColor = sensor.red();
+            ///int bColor = sensor.blue();
+            //telemetry.addData("Blue", bColor);
+            //telemetry.addData("Red", rColor);
+            //telemetry.update();
+            //result += rColor;
             //ToDo result += rColor - bColor
         }
 

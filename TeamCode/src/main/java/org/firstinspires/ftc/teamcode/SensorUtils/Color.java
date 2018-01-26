@@ -12,8 +12,8 @@ public class Color {
     private Color() {
     }
     public static <Mode extends LinearCustomOpMode> void senseColor (int hue, Mode mode){
-        if (ROBOT.getColorSensor().argb() == hue){
+        //if (ROBOT.getColorSensor().argb() == hue){
             MovementLib.forward(20, .1, mode);
         }
     }
-}
+//}

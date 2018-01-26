@@ -328,10 +328,12 @@ public class TestVuforiaNavigation extends LinearOpMode {
                 if (robotLocationTransform != null) {
                     lastLocation = robotLocationTransform;
                 }
+
                 try {
                     /*Grab the last known location
                     If the last known location is not null */
-                    if(lastLocation != null) {
+                    if(lastLocation != null && ((VuforiaTrackableDefaultListener)trackable.getListener()).isVisible()) {
+
                         /*Grab the translation vector and calculate the angle for each plane*/
                         VectorF translation = lastLocation.getTranslation();
                         double degreeXY = Math.toDegrees(Math.atan2(translation.get(axis.X()), translation.get(axis.Y())));
