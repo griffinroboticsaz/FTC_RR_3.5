@@ -7,6 +7,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.Movement.Timer;
 
 /**
  * Created by Griffins on 9/30/2017.
@@ -32,14 +33,16 @@ public class ManualOpMode extends OpMode {
     private Servo colorServo;
     private double liftDirection;
     private double powerReducer = 2;
-    private static final double OPEN_POSITION = 0.4;
-    private static final double CLOSED_POSITION = 0.5;
+    private static final double OPEN_POSITION = 0.7;
+    private static final double CLOSED_POSITION = .8;
     private double colorLowered = 1;
-    private double colorRaised = 0.45;
+    private double colorRaised = .31;
     private double directionDown = 0.2;
     private double directionUp = -0.667;
     private CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
 
+    public Timer speedToggleTimer;
+    public Timer armToggleTimer;
 
     private enum Device {
         FEEDERS, LEFTDRIVE, RIGHTDRIVE, ROTATOR,
@@ -71,12 +74,18 @@ public class ManualOpMode extends OpMode {
 
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+
+        speedToggleTimer = new Timer();
+        armToggleTimer = new Timer();
     }
 
     @Override
     public void loop() {
 
-        if (gamepad1.left_stick_button) {
+        speedToggleTimer.updateDeltaTime();
+        armToggleTimer.updateDeltaTime();
+
+        if (gamepad1.left_stick_button && speedToggleTimer.getDeltaTime() >= 200) {
             if (highspeed) {
                 highspeed = false;
                 speedMultiplyer = lowSpeedmultiplyer;
@@ -84,12 +93,32 @@ public class ManualOpMode extends OpMode {
                 highspeed = true;
                 speedMultiplyer = highSpeedmultiplyer;
             }
+            speedToggleTimer.resetTimer();
+        }
+
+        if (gamepad1.right_stick_button && armToggleTimer.getDeltaTime() >= 200) {
+            if (!openArm) {
+                armMotor.setPosition(OPEN_POSITION);
+                openArm = true;
+            } else {
+                armMotor.setPosition(CLOSED_POSITION);
+                openArm = false;
+            }
+            armToggleTimer.resetTimer();
+        }
+
+        if (gamepad1.a) {
+                armMotor.setPosition(OPEN_POSITION);
+                openArm = true;
+        } else if(gamepad1.b) {
+                armMotor.setPosition(CLOSED_POSITION);
+                openArm = false;
         }
 
         leftMotor.setPower(power(Device.LEFTDRIVE));
         rightMotor.setPower(power(Device.RIGHTDRIVE));
-        leftFeeder.setPower(power(Device.FEEDERS));
-        rightFeeder.setPower(-power(Device.FEEDERS));
+        leftFeeder.setPower(-power(Device.FEEDERS));
+        rightFeeder.setPower(power(Device.FEEDERS));
 
         if (gamepad1.right_bumper) {liftDirection = directionUp;}
         else if (gamepad1.left_bumper) {liftDirection = directionDown;}
@@ -100,18 +129,6 @@ public class ManualOpMode extends OpMode {
 
         telemetry.addData("rotation power" , Rotator.getPower());
 
-        if (gamepad1.right_stick_button) {
-            if (!openArm) {
-                armMotor.setPosition(OPEN_POSITION);
-                openArm = true;
-            } else {
-                armMotor.setPosition(CLOSED_POSITION);
-                openArm = false;
-            }
-            if (openArm){
-                telemetry.addData("Is arm open?" , );
-            }
-        }
         if (gamepad1.x) {
             colorServo.setPosition(colorRaised);
         } else if (gamepad1.y) {
@@ -121,8 +138,8 @@ public class ManualOpMode extends OpMode {
 
     private double power(Device device){
         switch (device){
-            case LEFTDRIVE: return ((-gamepad1.left_stick_y + gamepad1.left_stick_x)/2) * speedMultiplyer;
-            case RIGHTDRIVE: return ((-gamepad1.left_stick_y - gamepad1.left_stick_x)/2) * speedMultiplyer;
+            case LEFTDRIVE: return ((-gamepad1.left_stick_y + gamepad1.left_stick_x)) * speedMultiplyer;
+            case RIGHTDRIVE: return ((-gamepad1.left_stick_y - gamepad1.left_stick_x)) * speedMultiplyer;
             case FEEDERS: return (gamepad1.right_trigger - gamepad1.left_trigger);
             case ROTATOR: return -gamepad1.right_stick_y;
             default: throw new IllegalArgumentException("There is no such motor!");

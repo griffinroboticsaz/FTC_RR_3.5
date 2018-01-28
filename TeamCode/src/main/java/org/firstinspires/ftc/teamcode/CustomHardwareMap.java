@@ -70,7 +70,7 @@ public class CustomHardwareMap {
 
     public BNO055IMU gyroscope = null;
 
-    //public ColorSensor colorSensor = null;
+    public ColorSensor colorSensor = null;
 
     public static final double MID_SERVO = 0.5;
 
@@ -104,7 +104,7 @@ public class CustomHardwareMap {
         lift = hwMap.get(DcMotor.class, "lift");
         leftFeeder = hwMap.get(DcMotor.class, "leftFeeder");
         rightFeeder = hwMap.get(DcMotor.class, "rightFeeder");
-        //colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
+        colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
         colorServo = hwMap.get(Servo.class, "colorServo");
         arm = hwMap.get(Servo.class, "arm");
         rot = hwMap.get(DcMotor.class, "rot");
@@ -137,7 +137,8 @@ public class CustomHardwareMap {
 
         // Define and initialize ALL installed servos.
         arm = hwMap.get(Servo.class, "arm");
-        arm.setPosition(MID_SERVO);
+        arm.setPosition(.8);
+
 
     }
 
@@ -173,9 +174,11 @@ public class CustomHardwareMap {
         return gyroscope;
     }
 
-    public Servo getColorServo() { return colorServo; }
-
-    //public ColorSensor getColorSensor() {
-        //return colorSensor;
+    public Servo getColorServo() {
+        return colorServo;
     }
 
+    public ColorSensor getColorSensor() {
+        return colorSensor;
+    }
+}

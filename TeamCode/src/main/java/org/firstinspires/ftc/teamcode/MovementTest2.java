@@ -30,8 +30,6 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.SwitchableLight;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
 import org.firstinspires.ftc.teamcode.Movement.MovementLib;
@@ -50,8 +48,8 @@ import org.firstinspires.ftc.teamcode.Movement.MovementLib;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 
-@Autonomous(name = "MovementTest", group = "Linear Autonomous")
-public class MovementTest extends LinearCustomOpMode {
+@Autonomous(name = "MovementTest2", group = "Linear Autonomous")
+public class MovementTest2 extends LinearCustomOpMode {
 
     @Override
     public void runOpMode() {
