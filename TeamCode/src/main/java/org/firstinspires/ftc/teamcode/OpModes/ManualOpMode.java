@@ -1,18 +1,19 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.Movement.Timer;
+
+import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 /**
  * Created by Griffins on 9/30/2017.
  */
-@TeleOp(name = "manual", group = "TeleOp")
+@TeleOp(name = "manual", group = "OpModes")
 //@Disabled
 public class ManualOpMode extends OpMode {
     boolean highspeed = true;
@@ -32,11 +33,6 @@ public class ManualOpMode extends OpMode {
     private Servo armMotor;
     private Servo colorServo;
     private double liftDirection;
-    private double powerReducer = 2;
-    private static final double OPEN_POSITION = 0.7;
-    private static final double CLOSED_POSITION = .8;
-    private double colorLowered = 1;
-    private double colorRaised = .31;
     private double directionDown = 0.2;
     private double directionUp = -0.667;
     private CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
@@ -69,8 +65,8 @@ public class ManualOpMode extends OpMode {
         }
         liftMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        armMotor.setPosition(OPEN_POSITION);
-        colorServo.setPosition(colorRaised);
+        armMotor.setPosition(OPEN_ARM_POSITION);
+        colorServo.setPosition(COLOR_SERVO_RAISED);
 
         leftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
         rightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
@@ -98,22 +94,25 @@ public class ManualOpMode extends OpMode {
 
         if (gamepad1.right_stick_button && armToggleTimer.getDeltaTime() >= 200) {
             if (!openArm) {
-                armMotor.setPosition(OPEN_POSITION);
+                armMotor.setPosition(OPEN_ARM_POSITION);
                 openArm = true;
             } else {
-                armMotor.setPosition(CLOSED_POSITION);
+                armMotor.setPosition(CLOSED_ARM_POSITION);
                 openArm = false;
             }
             armToggleTimer.resetTimer();
         }
+        float armPosition = 0.5f;
 
         if (gamepad1.a) {
-                armMotor.setPosition(OPEN_POSITION);
-                openArm = true;
+            armPosition += .02;
+            openArm = true;
         } else if(gamepad1.b) {
-                armMotor.setPosition(CLOSED_POSITION);
-                openArm = false;
+            armPosition -= .02;
+            openArm = false;
         }
+        telemetry.addData("Current Arm Position: ", armPosition);
+        armMotor.setPosition(armPosition);
 
         leftMotor.setPower(power(Device.LEFTDRIVE));
         rightMotor.setPower(power(Device.RIGHTDRIVE));
@@ -130,9 +129,9 @@ public class ManualOpMode extends OpMode {
         telemetry.addData("rotation power" , Rotator.getPower());
 
         if (gamepad1.x) {
-            colorServo.setPosition(colorRaised);
+            colorServo.setPosition(COLOR_SERVO_RAISED);
         } else if (gamepad1.y) {
-            colorServo.setPosition(colorLowered);
+            colorServo.setPosition(COLOR_SERVO_LOWERED);
         }
     }
 

@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.SensorUtils;
 
-import org.firstinspires.ftc.teamcode.CustomHardwareMap;
+import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 
 /**
  * Created by Justin on 10/28/2017.

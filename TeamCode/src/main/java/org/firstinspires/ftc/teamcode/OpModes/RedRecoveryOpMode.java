@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.OpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.ColorSensor;
@@ -7,11 +7,11 @@ import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
 import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 
 /**
- * Created by josephodeh and evan on 11/30/17.
+ * Created by josephodeh on 11/27/17.
  */
 
-@Autonomous(name = "Red Corner", group = "Blue and Red OpModes")
-public class RedCornerOpMode extends LinearCustomOpMode {
+@Autonomous(name = "Red Recovery", group = "OpModes")
+public class RedRecoveryOpMode extends LinearCustomOpMode {
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -38,19 +38,17 @@ public class RedCornerOpMode extends LinearCustomOpMode {
         if (result/50 > 0) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo(this);
-            MovementLib.forward(21, .2, this);
+            MovementLib.forward(29, .2, this);
 
         }
         else {
             MovementLib.forward(-3, .2, this);
             MovementLib.raiseCServo(this);
-            MovementLib.forward(27, .2, this);
+            MovementLib.forward(35, .2, this);
         }
 
         try {
-            MovementLib.rotateRobot(-90, 52.43 , 1, this);
-            MovementLib.forward(18, .75, this);
-            MovementLib.rotateRobot(90, 52.43 , 1, this);
+            MovementLib.rotateRobot(90, 52.43, .75, this);
             MovementLib.rotateArm(-10, .4, this);
             MovementLib.openArm(this);
             MovementLib.rotateArm(32, .4, this);

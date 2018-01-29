@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.DeprecatedOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Griffins on 9/11/2017.
  */
 @TeleOp(name = "TestOpMode", group = "TeleOp")
-//@Disabled
+@Disabled
 public class TestOpMode extends OpMode{
 
     public DcMotor left;

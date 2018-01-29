@@ -27,9 +27,10 @@
  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package org.firstinspires.ftc.teamcode;
+package org.firstinspires.ftc.teamcode.DeprecatedOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
 import org.firstinspires.ftc.teamcode.Movement.MovementLib;
@@ -49,6 +50,7 @@ import org.firstinspires.ftc.teamcode.Movement.MovementLib;
  */
 
 @Autonomous(name = "MovementTest2", group = "Linear Autonomous")
+@Disabled
 public class MovementTest2 extends LinearCustomOpMode {
 
     @Override
