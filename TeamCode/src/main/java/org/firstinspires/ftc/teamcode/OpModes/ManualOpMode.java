@@ -36,6 +36,7 @@ public class ManualOpMode extends OpMode {
     private double directionDown = 0.2;
     private double directionUp = -0.667;
     private CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
+    //private float armPosition = 0.7f;
 
     public Timer speedToggleTimer;
     public Timer armToggleTimer;
@@ -102,17 +103,17 @@ public class ManualOpMode extends OpMode {
             }
             armToggleTimer.resetTimer();
         }
-        float armPosition = 0.5f;
 
         if (gamepad1.a) {
-            armPosition += .02;
+            armMotor.setPosition(OPEN_ARM_POSITION);
             openArm = true;
         } else if(gamepad1.b) {
-            armPosition -= .02;
+            armMotor.setPosition(CLOSED_ARM_POSITION);
             openArm = false;
         }
-        telemetry.addData("Current Arm Position: ", armPosition);
-        armMotor.setPosition(armPosition);
+
+        //telemetry.addData("Current Arm Position: ", armPosition);
+
 
         leftMotor.setPower(power(Device.LEFTDRIVE));
         rightMotor.setPower(power(Device.RIGHTDRIVE));
