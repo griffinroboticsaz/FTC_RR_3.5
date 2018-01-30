@@ -55,6 +55,7 @@ public class ManualOpMode extends OpMode {
             leftFeeder = chwMap.getLeftFeeder();
             rightFeeder = chwMap.getRightFeeder();
             colorServo = chwMap.getColorServo();
+            //colorSensor = chwMap.getColorSensor();
             armMotor = chwMap.getArm();
             Rotator = chwMap.getRot();
             rightMotor.setDirection(DcMotor.Direction.FORWARD);
