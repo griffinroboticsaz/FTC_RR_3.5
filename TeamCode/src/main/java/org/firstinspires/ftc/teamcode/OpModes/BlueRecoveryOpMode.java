@@ -27,47 +27,48 @@ public class BlueRecoveryOpMode extends LinearCustomOpMode {
         MovementLib.lowerCServo(this);
         sleep(100);
         double result = 0;
-        for (int i = 0; i < 50 ; i++) {
+        //for (int i = 0; i < 50 ; i++) {
+        while (!isStopRequested()){
             int rColor = sensor.red();
             int bColor = sensor.blue();
             telemetry.addData("Blue", bColor);
             telemetry.addData("Red", rColor);
             telemetry.update();
             result += bColor - rColor;
-        }
+        }}}
 
-        if (result/50 > 0) {
-            MovementLib.forward(3, .2, this);
-            MovementLib.raiseCServo(this);
-            MovementLib.forward(-30, .2, this);
-
-
-        }
-        else {
-            MovementLib.forward(-3, .2, this);
-            MovementLib.raiseCServo(this);
-            MovementLib.forward(-24, .2, this);
-        }
-
-        try {
-            MovementLib.rotateRobot(90, 52.43, .75, this);
-            MovementLib.rotateArm(-10, .4, this);
-            MovementLib.openArm(this);
-            MovementLib.rotateArm(32, .4, this);
-            MovementLib.closeArm(this);
-            MovementLib.rotateArm(-215, .4, this);
-            MovementLib.openArm(this);
-            sleep(500);
-            MovementLib.rotateArm(60, .4, this);
-            MovementLib.closeArm(this);
-            MovementLib.rotateArm(110, .4, this);
-            sleep(500);
-            MovementLib.forward(20, .2, this);
-            MovementLib.forward(-3, .2, this);
-
-        } catch (NullPointerException NPE) {
-            telemetry.addData("Error", NPE.getMessage());
-            telemetry.update();
-        }
-    }
-}
+//        if (result/50 > 0) {
+//            MovementLib.forward(3, .2, this);
+//            MovementLib.raiseCServo(this);
+//            MovementLib.forward(-30, .2, this);
+//
+//
+//        }
+//        else {
+//            MovementLib.forward(-3, .2, this);
+//            MovementLib.raiseCServo(this);
+//            MovementLib.forward(-24, .2, this);
+//        }
+//
+//        try {
+//            MovementLib.rotateRobot(90, 52.43, .75, this);
+//            MovementLib.rotateArm(-10, .4, this);
+//            MovementLib.openArm(this);
+//            MovementLib.rotateArm(32, .4, this);
+//            MovementLib.closeArm(this);
+//            MovementLib.rotateArm(-215, .4, this);
+//            MovementLib.openArm(this);
+//            sleep(500);
+//            MovementLib.rotateArm(60, .4, this);
+//            MovementLib.closeArm(this);
+//            MovementLib.rotateArm(110, .4, this);
+//            sleep(500);
+//            MovementLib.forward(20, .2, this);
+//            MovementLib.forward(-3, .2, this);
+//
+//        } catch (NullPointerException NPE) {
+//            telemetry.addData("Error", NPE.getMessage());
+//            telemetry.update();
+//        }
+//    }
+//}

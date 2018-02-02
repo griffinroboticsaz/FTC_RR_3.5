@@ -33,6 +33,7 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
@@ -68,7 +69,7 @@ public class CustomHardwareMap {
 
     public BNO055IMU gyroscope = null;
 
-    public ColorSensor colorSensor = null;
+    public OpticalDistanceSensor colorSensor = null;
 
     public static CustomHardwareMap getInstance() {
         return instance;
@@ -97,7 +98,7 @@ public class CustomHardwareMap {
         lift = hwMap.get(DcMotor.class, "lift");
         leftFeeder = hwMap.get(DcMotor.class, "leftFeeder");
         rightFeeder = hwMap.get(DcMotor.class, "rightFeeder");
-        colorSensor = hwMap.get(ColorSensor.class, "colorSensor");
+        colorSensor = hwMap.get(OpticalDistanceSensor.class, "colorSensor");
         colorServo = hwMap.get(Servo.class, "colorServo");
         arm = hwMap.get(Servo.class, "arm");
         rot = hwMap.get(DcMotor.class, "rot");
@@ -171,7 +172,7 @@ public class CustomHardwareMap {
         return colorServo;
     }
 
-    public ColorSensor getColorSensor() {
+    public OpticalDistanceSensor getColorSensor() {
         return colorSensor;
     }
 }

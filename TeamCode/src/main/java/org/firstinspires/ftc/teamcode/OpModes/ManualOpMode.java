@@ -36,7 +36,8 @@ public class ManualOpMode extends OpMode {
     private double directionDown = 0.2;
     private double directionUp = -0.667;
     private CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
-    //private float armPosition = 0.7f;
+    private float armPosition = 0.7f;
+    private double colorPosition = 0.25;
 
     public Timer speedToggleTimer;
     public Timer armToggleTimer;
@@ -106,14 +107,15 @@ public class ManualOpMode extends OpMode {
         }
 
         if (gamepad1.a) {
-            armMotor.setPosition(OPEN_ARM_POSITION);
-            openArm = true;
+            armPosition += .01;
+            armMotor.setPosition(armPosition);
+            //openArm = true;
         } else if(gamepad1.b) {
-            armMotor.setPosition(CLOSED_ARM_POSITION);
-            openArm = false;
+            armPosition -= .01;
+            armMotor.setPosition(armPosition);
+            //openArm = false;
         }
-
-        //telemetry.addData("Current Arm Position: ", armPosition);
+        telemetry.addData("Current Arm Position: ", armPosition);
 
 
         leftMotor.setPower(power(Device.LEFTDRIVE));
@@ -131,10 +133,13 @@ public class ManualOpMode extends OpMode {
         telemetry.addData("rotation power" , Rotator.getPower());
 
         if (gamepad1.x) {
-            colorServo.setPosition(COLOR_SERVO_RAISED);
+            colorPosition += .01;
+            colorServo.setPosition(colorPosition);
         } else if (gamepad1.y) {
-            colorServo.setPosition(COLOR_SERVO_LOWERED);
+            colorPosition -= .01;
+            colorServo.setPosition(colorPosition);
         }
+        telemetry.addData("Current Arm Position:" , colorPosition);
     }
 
     private double power(Device device){

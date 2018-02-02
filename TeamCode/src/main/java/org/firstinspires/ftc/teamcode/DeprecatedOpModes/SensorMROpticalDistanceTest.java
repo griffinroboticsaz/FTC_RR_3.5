@@ -46,10 +46,12 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 @Disabled
 public class SensorMROpticalDistanceTest extends LinearOpMode {
 
-  OpticalDistanceSensor odsSensor;  // Hardware Device Object
+  OpticalDistanceSensor odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
+
 
   @Override
   public void runOpMode() {
+
 
     // get a reference to our Light Sensor object.
     odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
@@ -68,4 +70,26 @@ public class SensorMROpticalDistanceTest extends LinearOpMode {
       telemetry.update();
     }
   }
+  public double getColorData (){
+    double maxBrightness = 0;
+    double currentBrightness;
+
+
+    //Get color brightness
+    for (int i = 0; i < 100 ; i++) {
+      currentBrightness = odsSensor.getRawLightDetected();
+    }
+    // compare Brightness to max brightness
+
+    // if maxbrightness < currentBrightness, then currentBrightness = maxBrightness
+
+    //TELEMETRY!!!!!!
+
+
+
+
+
+
+  }
 }
+
