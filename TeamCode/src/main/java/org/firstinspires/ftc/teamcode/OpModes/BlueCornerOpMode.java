@@ -14,7 +14,6 @@ import org.firstinspires.ftc.teamcode.Movement.Constants.*;
 @Autonomous(name = "Blue Corner", group = "OpModes")
 public class BlueCornerOpMode extends LinearOpMode {
     CustomHardwareMap robot = CustomHardwareMap.getInstance();
-    boolean red;
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
@@ -29,13 +28,11 @@ public class BlueCornerOpMode extends LinearOpMode {
 
 
         if (odsColor.getColorData() > 1.5) {
-            red = true;
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
             MovementLib.forward(-27, .2, this);
         }
         else {
-            red = false;
             MovementLib.forward(-3, .2, this);
             MovementLib.raiseCServo();
             MovementLib.forward(-21, .2, this);
