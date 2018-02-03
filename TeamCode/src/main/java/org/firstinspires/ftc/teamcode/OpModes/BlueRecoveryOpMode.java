@@ -11,31 +11,31 @@ import org.firstinspires.ftc.teamcode.Movement.MovementLib;
  */
 //Change movements to blue side directions
 
-@Autonomous(name = "Blue Recovery", group = "OpModes")
-public class BlueRecoveryOpMode extends LinearCustomOpMode {
-    @Override
-    public void runOpMode() {
-        robot.init(hardwareMap);
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
-        robot.getColorServo().setPosition(0.31);
+//@Autonomous(name = "Blue Recovery", group = "OpModes")
+//public class BlueRecoveryOpMode extends LinearCustomOpMode {
+//    @Override
+//    public void runOpMode() {
+//        robot.init(hardwareMap);
+//        telemetry.addData("Status", "Initialized");
+//        telemetry.update();
+//        robot.getColorServo().setPosition(0.31);
+//
+//        waitForStart();
+//        runtime.reset();
+        //ColorSensor sensor = robot.getColorSensor();
 
-        waitForStart();
-        runtime.reset();
-        ColorSensor sensor = robot.getColorSensor();
-
-        MovementLib.lowerCServo(this);
-        sleep(100);
-        double result = 0;
-        //for (int i = 0; i < 50 ; i++) {
-        while (!isStopRequested()){
-            int rColor = sensor.red();
-            int bColor = sensor.blue();
-            telemetry.addData("Blue", bColor);
-            telemetry.addData("Red", rColor);
-            telemetry.update();
-            result += bColor - rColor;
-        }}}
+//        MovementLib.lowerCServo(this);
+//        sleep(100);
+//        double result = 0;
+//        //for (int i = 0; i < 50 ; i++) {
+//        while (!isStopRequested()){
+//            int rColor = sensor.red();
+//            int bColor = sensor.blue();
+//            telemetry.addData("Blue", bColor);
+//            telemetry.addData("Red", rColor);
+//            telemetry.update();
+//            result += bColor - rColor;
+//        }}}
 
 //        if (result/50 > 0) {
 //            MovementLib.forward(3, .2, this);

@@ -21,32 +21,32 @@ public class BlueCornerOpMode extends LinearCustomOpMode {
 
         waitForStart();
         runtime.reset();
-        ColorSensor sensor = robot.getColorSensor();
-
-        MovementLib.lowerCServo(this);
-        sleep(100);
-        double result = 0;
-        for (int i = 0; i < 50 ; i++) {
-            int rColor = sensor.red();
-            int bColor = sensor.blue();
-            telemetry.addData("Blue", bColor);
-            telemetry.addData("Red", rColor);
-            telemetry.update();
-            result += bColor - rColor;
-        }
-
-        if (result/50 > 0) {
-            MovementLib.forward(3, .2, this);
-            MovementLib.raiseCServo(this);
-            MovementLib.forward(-27, .2, this);
-
-        }
-        else {
-            MovementLib.forward(-3, .2, this);
-            MovementLib.raiseCServo(this);
-            MovementLib.forward(-21, .2, this);
-        }
-
+//        ColorSensor sensor = robot.getColorSensor();
+//
+//        MovementLib.lowerCServo(this);
+//        sleep(100);
+//        double result = 0;
+//        for (int i = 0; i < 50 ; i++) {
+//            int rColor = sensor.red();
+//            int bColor = sensor.blue();
+//            telemetry.addData("Blue", bColor);
+//            telemetry.addData("Red", rColor);
+//            telemetry.update();
+//            result += bColor - rColor;
+//        }
+//
+//        if (result/50 > 0) {
+//            MovementLib.forward(3, .2, this);
+//            MovementLib.raiseCServo(this);
+//            MovementLib.forward(-27, .2, this);
+//
+//        }
+//        else {
+//            MovementLib.forward(-3, .2, this);
+//            MovementLib.raiseCServo(this);
+//            MovementLib.forward(-21, .2, this);
+//        }
+//
         try {
             MovementLib.rotateRobot(-90, 52.43, .75, this);
             MovementLib.forward(18, .75, this);

@@ -37,6 +37,8 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
+
 /**
  * This is NOT an opmode.
  * <p>
@@ -132,6 +134,7 @@ public class CustomHardwareMap {
         // Define and initialize ALL installed servos.
         arm = hwMap.get(Servo.class, "arm");
         arm.setPosition(.8);
+        colorServo.setPosition(COLOR_SERVO_RAISED);
 
 
     }

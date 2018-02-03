@@ -32,7 +32,14 @@ package org.firstinspires.ftc.teamcode.DeprecatedOpModes;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.hardware.Servo;
+
+import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
+import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
+
+import static org.firstinspires.ftc.teamcode.Movement.Constants.COLOR_SERVO_LOWERED;
 
 /*
  * This is an example LinearOpMode that shows how to use
@@ -43,53 +50,68 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
  * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
  */
 @TeleOp(name = "Sensor: MR ODS", group = "Sensor")
-@Disabled
+//@Disabled
+
 public class SensorMROpticalDistanceTest extends LinearOpMode {
-
-  OpticalDistanceSensor odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
-
-
+    //OpticalDistanceSensor odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
+    CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
+    OpticalDistanceSensor colorSensor;
+    Servo colorServo;
   @Override
   public void runOpMode() {
-
+      chwmap.init(hardwareMap);
+      colorSensor = chwmap.getColorSensor();
+      colorServo = chwmap.getColorServo();
+      boolean red;
 
     // get a reference to our Light Sensor object.
-    odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
+    //odsSensor = hardwareMap.get(OpticalDistanceSensor.class, "sensor_ods");
 
     // wait for the start button to be pressed.
     waitForStart();
+    colorServo.setPosition(COLOR_SERVO_LOWERED);
 
     // while the op mode is active, loop and read the light levels.
     // Note we use opModeIsActive() as our loop condition because it is an interruptible method.
     while (opModeIsActive()) {
 
-      // send the info back to driver station using telemetry function.
-      telemetry.addData("Raw",    odsSensor.getRawLightDetected());
-      telemetry.addData("Normal", odsSensor.getLightDetected());
+        if (getColorData() > 1.5) {
+            red = true;
+        }
+        else {
+            red = false;
+        }
 
-      telemetry.update();
+      // send the info back to driver station using telemetry function.
+        telemetry.addData("seesRed", red);
+        telemetry.addData("seesBlue", !red);
+        telemetry.addData("Raw", colorSensor.getRawLightDetected());
+        telemetry.addData("Normal", colorSensor.getLightDetected());
+        telemetry.addData("Max Brightness", getColorData());
+
+        telemetry.update();
     }
   }
-  public double getColorData (){
+  public double getColorData () {
+
     double maxBrightness = 0;
+
     double currentBrightness;
 
 
     //Get color brightness
-    for (int i = 0; i < 100 ; i++) {
-      currentBrightness = odsSensor.getRawLightDetected();
+    for (int i = 0; i < 100; i++) {
+      currentBrightness = colorSensor.getRawLightDetected();
+      if (maxBrightness <= currentBrightness){
+        maxBrightness = currentBrightness;
+      }
     }
     // compare Brightness to max brightness
 
-    // if maxbrightness < currentBrightness, then currentBrightness = maxBrightness
-
     //TELEMETRY!!!!!!
+    //No... ^
 
-
-
-
-
+    return maxBrightness;
 
   }
 }
-
