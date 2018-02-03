@@ -63,17 +63,17 @@ class DebugOp extends OpMode {
         colorServoTimer.updateDeltaTime();
         armServoTimer.updateDeltaTime();
 
-        if(gamepad1.a && colorServoTimer.getDeltaTime() > 20){
+        if(gamepad1.a && colorServoTimer.getDeltaTime() > 20 && cServoPos < 1){
             cServoPos += .01;
             colorServoTimer.resetTimer();
-        }else if (gamepad1.b && colorServoTimer.getDeltaTime() > 20){
+        }else if (gamepad1.b && colorServoTimer.getDeltaTime() > 20 && cServoPos > 0){
             cServoPos -= .01;
             colorServoTimer.resetTimer();
         }
-        if(gamepad1.x && armServoTimer.getDeltaTime() > 20){
+        if(gamepad1.x && armServoTimer.getDeltaTime() > 20 && armServoPos < 1){
             armServoPos += .01;
             armServoTimer.resetTimer();
-        }else if (gamepad1.y && armServoTimer.getDeltaTime() > 20){
+        }else if (gamepad1.y && armServoTimer.getDeltaTime() > 20 && armServoPos > 0){
             armServoPos -= .01;
             armServoTimer.resetTimer();
         }

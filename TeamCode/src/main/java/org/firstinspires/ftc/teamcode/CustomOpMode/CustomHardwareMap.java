@@ -38,6 +38,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
 import org.firstinspires.ftc.teamcode.Debugger.ErrorType;
+import org.firstinspires.ftc.teamcode.Debugger.debugMessage;
 
 import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
@@ -84,9 +85,7 @@ public class CustomHardwareMap {
     /* local OpMode members. */
     HardwareMap hwMap = null;
 
-    StackTraceElement error;
-    ErrorType errorType = ErrorType.NONE;
-
+    debugMessage message;
     private ElapsedTime period = new ElapsedTime();
 
     /* Constructor */
@@ -110,8 +109,8 @@ public class CustomHardwareMap {
             colorServo = hwMap.get(Servo.class, "colorServo");
             arm = hwMap.get(Servo.class, "arm");
             rot = hwMap.get(DcMotor.class, "rot");
-        }catch (NullPointerException NPE){
-
+        }catch (Exception E){
+            message = new debugMessage(E);
         }
        /* BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES; //changed from radians

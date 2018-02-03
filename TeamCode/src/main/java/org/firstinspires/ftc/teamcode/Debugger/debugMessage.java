@@ -8,12 +8,10 @@ public class debugMessage {
 
     private Exception error;
     private StackTraceElement stackTraceElement;
-    private ErrorType errorType;
 
-    public debugMessage(Exception error, ErrorType type){
+    public debugMessage(Exception error){
         this.error = error;
         stackTraceElement = error.getStackTrace()[0];
-        errorType = type;
     }
 
     public String getErrorName(){
