@@ -18,7 +18,7 @@ import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 
 @TeleOp(name = "Debugger", group = "OpModes")
-class DebugOp extends OpMode {
+public class DebugOp extends OpMode {
 
     private CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
 
