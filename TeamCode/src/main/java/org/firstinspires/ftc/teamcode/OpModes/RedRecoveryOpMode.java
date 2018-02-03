@@ -1,17 +1,12 @@
 package org.firstinspires.ftc.teamcode.OpModes;
 
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-
-import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
-import org.firstinspires.ftc.teamcode.Movement.MovementLib;
-
 /**
  * Created by josephodeh on 11/27/17.
  */
 
 //@Autonomous(name = "Red Recovery", group = "OpModes")
-//public class RedRecoveryOpMode extends LinearCustomOpMode {
+//public class RedRecoveryOpMode extends LinearOpMode {
+//CustomHardwareMap robot = CustomHardwareMap.getInstance();
 //    @Override
 //    public void runOpMode() {
 //        robot.init(hardwareMap);
@@ -20,10 +15,9 @@ import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 //        robot.getColorServo().setPosition(0.31);
 //
 //        waitForStart();
-//        runtime.reset();
 //        //ColorSensor sensor = robot.getColorSensor();
 //
-//        MovementLib.lowerCServo(this);
+//        MovementLib.lowerCServo();
 //        sleep(100);
 //        double result = 0;
 //        for (int i = 0; i < 50 ; i++) {
@@ -37,27 +31,27 @@ import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 //
 //        if (result/50 > 0) {
 //            MovementLib.forward(3, .2, this);
-//            MovementLib.raiseCServo(this);
+//            MovementLib.raiseCServo();
 //            MovementLib.forward(29, .2, this);
 //
 //        }
 //        else {
 //            MovementLib.forward(-3, .2, this);
-//            MovementLib.raiseCServo(this);
+//            MovementLib.raiseCServo();
 //            MovementLib.forward(35, .2, this);
 //        }
 //
 //        try {
 //            MovementLib.rotateRobot(90, 52.43, .75, this);
 //            MovementLib.rotateArm(-10, .4, this);
-//            MovementLib.openArm(this);
+//            MovementLib.openArm();
 //            MovementLib.rotateArm(32, .4, this);
-//            MovementLib.closeArm(this);
+//            MovementLib.closeArm();
 //            MovementLib.rotateArm(-215, .4, this);
-//            MovementLib.openArm(this);
+//            MovementLib.openArm();
 //            sleep(500);
 //            MovementLib.rotateArm(60, .4, this);
-//            MovementLib.closeArm(this);
+//            MovementLib.closeArm();
 //            MovementLib.rotateArm(110, .4, this);
 //            sleep(500);
 //            MovementLib.forward(15, .2, this);

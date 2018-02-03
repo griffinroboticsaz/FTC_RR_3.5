@@ -1,13 +1,38 @@
 package org.firstinspires.ftc.teamcode.SensorUtils;
 
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+
+import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
+
 /**
  * Created by brianroper on 1/27/18.
  */
 
 public class odsColor {
-    double maxBrightness = 0;
-    double updatedBrightness = 0;
+    private static CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
+
+    private static OpticalDistanceSensor colorSensor = chwmap.getColorSensor();
 
 
+    public static double getColorData () {
+
+        double maxBrightness = 0;
+
+        double currentBrightness;
+
+
+        //Get color brightness
+        for (int i = 0; i < 100; i++) {
+            currentBrightness = colorSensor.getRawLightDetected();
+            if (maxBrightness <= currentBrightness){
+                maxBrightness = currentBrightness;
+            }
+        }
+        // compare Brightness to max brightness
+
+
+        return maxBrightness;
+
+    }
 
 }

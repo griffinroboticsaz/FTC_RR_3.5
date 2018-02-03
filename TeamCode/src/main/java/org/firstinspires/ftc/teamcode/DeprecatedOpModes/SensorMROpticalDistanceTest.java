@@ -29,15 +29,12 @@
 
 package org.firstinspires.ftc.teamcode.DeprecatedOpModes;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
-import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
 
 import static org.firstinspires.ftc.teamcode.Movement.Constants.COLOR_SERVO_LOWERED;
 

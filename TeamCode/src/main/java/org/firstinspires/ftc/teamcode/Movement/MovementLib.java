@@ -1,11 +1,13 @@
 package org.firstinspires.ftc.teamcode.Movement;
 
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
-import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
 import org.firstinspires.ftc.teamcode.SensorUtils.GyroUtils;
+
+import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 public class MovementLib {
     public static final CustomHardwareMap ROBOT = CustomHardwareMap.instance;
@@ -13,7 +15,7 @@ public class MovementLib {
     private MovementLib() {
     }
 
-    public static <Mode extends LinearCustomOpMode> void forward(double inches, double speed, Mode mode) {
+    public static void forward(double inches, double speed, LinearOpMode mode) {
         mode.telemetry.addData("Working!", "");
         int counts = EncoderUtils.calcCounts(inches);
 
@@ -32,7 +34,7 @@ public class MovementLib {
         ROBOT.getRight().setPower(speed);
         ROBOT.getLeft().setPower(speed);
 
-        while (ROBOT.getRight().isBusy() && ROBOT.getLeft().isBusy()) {
+        while (ROBOT.getRight().isBusy() && ROBOT.getLeft().isBusy() && !mode.isStopRequested()) {
             mode.telemetry.addData("Counts", counts);
             mode.telemetry.addData("Counts Left", ROBOT.getLeft().getCurrentPosition());
             mode.telemetry.addData("Counts Right", ROBOT.getRight().getCurrentPosition());
@@ -58,12 +60,12 @@ public class MovementLib {
      * @param angle  the number of degrees to be turned by the robot
      * @param speed  the speed at which to turn the robot {0.0, 1.0}
      * @param mode   the OpMode using the method
-     * @param <Mode> an OpMode that extends {@link LinearCustomOpMode}
      * @throws IllegalArgumentException Thrown if the argument angles = 0.
      * @see GyroUtils#calcTurnSpeed(double, double)
      * @see GyroUtils#calcAngleTurned(CustomHardwareMap, long)
      */
-    public static <Mode extends LinearCustomOpMode> void rotate(double angle, double speed, Mode mode) {
+    //Todo: redo JavaDocs
+    public static void rotate(double angle, double speed, LinearOpMode mode) {
         if (angle == 0) {
             throw new IllegalArgumentException("Angle cannot be 0!");
         }
@@ -127,7 +129,7 @@ public class MovementLib {
         right.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
     }
-    public static void rotateRobot(double degrees, double Radius, double speedMultiplier, OpMode mode) {
+    public static void rotateRobot(double degrees, double Radius, double speedMultiplier, LinearOpMode mode) {
         //Step One: Distance = Pie * Radius * degrees / 180
         double Distance = (Math.PI * Radius * degrees) / 180;
 
@@ -154,7 +156,7 @@ public class MovementLib {
         //Step Four A: Set speed
         leftMotor.setPower(speedMultiplier);
 
-        while (leftMotor.isBusy()) {
+        while (leftMotor.isBusy() && !mode.isStopRequested()) {
             mode.telemetry.addData("Counts", counts);
             mode.telemetry.addData("Counts Left", ROBOT.getLeft().getCurrentPosition());
             mode.telemetry.update();
@@ -163,7 +165,7 @@ public class MovementLib {
         leftMotor.setPower(0);
 
     }
-    public static <Mode extends LinearCustomOpMode> void rotateArm(double angle, double speed, Mode mode) {
+    public static void rotateArm(double angle, double speed, LinearOpMode mode) {
         ROBOT.getRot().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
         ROBOT.getRot().setMode(DcMotor.RunMode.RUN_USING_ENCODER);
         int countsPerRotation = 1120;
@@ -171,7 +173,7 @@ public class MovementLib {
         ROBOT.getRot().setTargetPosition(counts);
         ROBOT.getRot().setMode(DcMotor.RunMode.RUN_TO_POSITION);
         ROBOT.getRot().setPower(speed);
-        while (ROBOT.getRot().isBusy()) {
+        while (ROBOT.getRot().isBusy() && !mode.isStopRequested()) {
             mode.telemetry.addData("Moving rotation arm to", counts);
             mode.telemetry.addData("Current Position", ROBOT.getRot().getCurrentPosition());
             mode.telemetry.update();
@@ -180,19 +182,19 @@ public class MovementLib {
         ROBOT.getRot().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
 
-    public static <Mode extends LinearCustomOpMode> void closeArm(Mode mode) {
-        ROBOT.getArm().setPosition(0.8);
+    public static void closeArm() {
+        ROBOT.getArm().setPosition(CLOSED_ARM_POSITION);
     }
 
-    public static <Mode extends LinearCustomOpMode> void openArm(Mode mode) {
-        ROBOT.getArm().setPosition(0.7);
+    public static void openArm() {
+        ROBOT.getArm().setPosition(OPEN_ARM_POSITION);
     }
 
-    public static <Mode extends LinearCustomOpMode> void lowerCServo(Mode mode) {
-        ROBOT.getColorServo().setPosition(1);
+    public static void lowerCServo() {
+        ROBOT.getColorServo().setPosition(COLOR_SERVO_LOWERED);
     }
 
-    public static <Mode extends LinearCustomOpMode> void raiseCServo(Mode mode) {
-        ROBOT.getColorServo().setPosition(.31);
+    public static void raiseCServo() {
+        ROBOT.getColorServo().setPosition(COLOR_SERVO_RAISED);
     }
 }

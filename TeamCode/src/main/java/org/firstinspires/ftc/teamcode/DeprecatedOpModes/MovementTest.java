@@ -31,10 +31,9 @@ package org.firstinspires.ftc.teamcode.DeprecatedOpModes;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.Disabled;
-import com.qualcomm.robotcore.hardware.ColorSensor;
-import com.qualcomm.robotcore.hardware.SwitchableLight;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
-import org.firstinspires.ftc.teamcode.CustomOpMode.LinearCustomOpMode;
+import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 
 
@@ -53,17 +52,16 @@ import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 
 @Autonomous(name = "MovementTest", group = "Linear Autonomous")
     @Disabled
-public class MovementTest extends LinearCustomOpMode {
-
+public class MovementTest extends LinearOpMode {
+    CustomHardwareMap robot = CustomHardwareMap.getInstance();
     @Override
     public void runOpMode() {
         robot.init(hardwareMap);
-        MovementLib.closeArm(this);
+        MovementLib.closeArm();
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
         waitForStart();
-        runtime.reset();
         double radius = 52.43;
         //ColorSensor sensor = robot.getColorSensor();
         /*
