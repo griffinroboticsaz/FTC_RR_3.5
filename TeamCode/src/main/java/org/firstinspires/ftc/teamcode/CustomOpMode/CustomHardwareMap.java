@@ -37,6 +37,8 @@ import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.teamcode.Debugger.ErrorType;
+
 import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 /**
@@ -82,6 +84,9 @@ public class CustomHardwareMap {
     /* local OpMode members. */
     HardwareMap hwMap = null;
 
+    StackTraceElement error;
+    ErrorType errorType = ErrorType.NONE;
+
     private ElapsedTime period = new ElapsedTime();
 
     /* Constructor */
@@ -95,16 +100,19 @@ public class CustomHardwareMap {
         hwMap = ahwMap;
 
         // Define and Initialize Motors
-        left = hwMap.get(DcMotor.class, "left");
-        right = hwMap.get(DcMotor.class, "right");
-        lift = hwMap.get(DcMotor.class, "lift");
-        leftFeeder = hwMap.get(DcMotor.class, "leftFeeder");
-        rightFeeder = hwMap.get(DcMotor.class, "rightFeeder");
-        colorSensor = hwMap.get(OpticalDistanceSensor.class, "colorSensor");
-        colorServo = hwMap.get(Servo.class, "colorServo");
-        arm = hwMap.get(Servo.class, "arm");
-        rot = hwMap.get(DcMotor.class, "rot");
+        try {
+            left = hwMap.get(DcMotor.class, "left");
+            right = hwMap.get(DcMotor.class, "right");
+            lift = hwMap.get(DcMotor.class, "lift");
+            leftFeeder = hwMap.get(DcMotor.class, "leftFeeder");
+            rightFeeder = hwMap.get(DcMotor.class, "rightFeeder");
+            colorSensor = hwMap.get(OpticalDistanceSensor.class, "colorSensor");
+            colorServo = hwMap.get(Servo.class, "colorServo");
+            arm = hwMap.get(Servo.class, "arm");
+            rot = hwMap.get(DcMotor.class, "rot");
+        }catch (NullPointerException NPE){
 
+        }
        /* BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES; //changed from radians
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;

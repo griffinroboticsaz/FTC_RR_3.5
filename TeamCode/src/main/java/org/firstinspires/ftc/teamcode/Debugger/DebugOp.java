@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.Debugger;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -16,30 +17,30 @@ import org.firstinspires.ftc.teamcode.Movement.Timer;
 import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 
-@Autonomous(name = "Debugger", group = "OpModes")
-public class DebugOp extends OpMode {
+@TeleOp(name = "Debugger", group = "OpModes")
+class DebugOp extends OpMode {
 
-    CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
+    private final CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
 
-    DcMotor left;
-    DcMotor right;
+    private DcMotor left;
+    private DcMotor right;
 
-    DcMotor feederRight;
-    DcMotor feederLeft;
+    private DcMotor feederRight;
+    private DcMotor feederLeft;
 
-    DcMotor rot;
-    DcMotor lift;
+    private DcMotor rot;
+    private DcMotor lift;
 
-    Servo colorServo;
-    Servo armServo;
+    private Servo colorServo;
+    private Servo armServo;
 
-    OpticalDistanceSensor colorSensor;
+    private OpticalDistanceSensor colorSensor;
 
-    double cServoPos = COLOR_SERVO_RAISED;
-    double armServoPos = OPEN_ARM_POSITION;
+    private double cServoPos = COLOR_SERVO_RAISED;
+    private double armServoPos = OPEN_ARM_POSITION;
 
-    Timer colorServoTimer = new Timer();
-    Timer armServoTimer = new Timer();
+    private final Timer colorServoTimer = new Timer();
+    private final Timer armServoTimer = new Timer();
 
     @Override
     public void init() {
@@ -59,6 +60,8 @@ public class DebugOp extends OpMode {
 
     @Override
     public void loop() {
+        colorServoTimer.updateDeltaTime();
+        armServoTimer.updateDeltaTime();
 
         if(gamepad1.a && colorServoTimer.getDeltaTime() > 20){
             cServoPos += .01;
@@ -74,6 +77,9 @@ public class DebugOp extends OpMode {
             armServoPos -= .01;
             armServoTimer.resetTimer();
         }
+
+        armServo.setPosition(armServoPos);
+        colorServo.setPosition(cServoPos);
 
 
         telemetry.addData("Current Color Servo Position:" , cServoPos);
