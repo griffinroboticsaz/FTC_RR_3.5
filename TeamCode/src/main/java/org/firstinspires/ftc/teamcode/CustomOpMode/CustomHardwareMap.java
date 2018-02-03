@@ -76,6 +76,8 @@ public class CustomHardwareMap {
 
     public OpticalDistanceSensor colorSensor = null;
 
+    public debugMessage message;
+
     public static CustomHardwareMap getInstance() {
         return instance;
     }
@@ -84,8 +86,6 @@ public class CustomHardwareMap {
 
     /* local OpMode members. */
     HardwareMap hwMap = null;
-
-    debugMessage message;
     private ElapsedTime period = new ElapsedTime();
 
     /* Constructor */
@@ -109,9 +109,6 @@ public class CustomHardwareMap {
             colorServo = hwMap.get(Servo.class, "colorServo");
             arm = hwMap.get(Servo.class, "arm");
             rot = hwMap.get(DcMotor.class, "rot");
-        }catch (Exception E){
-            message = new debugMessage(E);
-        }
        /* BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES; //changed from radians
         parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
@@ -119,31 +116,33 @@ public class CustomHardwareMap {
         gyroscope = hwMap.get(BNO055IMU.class, "imu");
         gyroscope.initialize(parameters);*/
 
-        left.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
-        right.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
-        lift.setDirection(DcMotor.Direction.REVERSE);
-        rot.setDirection(DcMotor.Direction.FORWARD);
+            left.setDirection(DcMotor.Direction.FORWARD); // Set to REVERSE if using AndyMark motors
+            right.setDirection(DcMotor.Direction.REVERSE);// Set to FORWARD if using AndyMark motors
+            lift.setDirection(DcMotor.Direction.REVERSE);
+            rot.setDirection(DcMotor.Direction.FORWARD);
 
-        // Set all motors to zero power
-        left.setPower(0);
-        right.setPower(0);
-        lift.setPower(0);
-        leftFeeder.setPower(0);
-        rightFeeder.setPower(0);
+            // Set all motors to zero power
+            left.setPower(0);
+            right.setPower(0);
+            lift.setPower(0);
+            leftFeeder.setPower(0);
+            rightFeeder.setPower(0);
 
-        // Set all motors to run without encoders.
-        // May want to use RUN_USING_ENCODERS if encoders are installed.
-        left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
-        rot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            // Set all motors to run without encoders.
+            // May want to use RUN_USING_ENCODERS if encoders are installed.
+            left.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            right.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            lift.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+            rot.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
 
-        // Define and initialize ALL installed servos.
-        arm = hwMap.get(Servo.class, "arm");
-        arm.setPosition(.8);
-        colorServo.setPosition(COLOR_SERVO_RAISED);
+            // Define and initialize ALL installed servos.
+            arm = hwMap.get(Servo.class, "arm");
+            arm.setPosition(.8);
+            colorServo.setPosition(COLOR_SERVO_RAISED);
 
-
+        } catch (Exception E) {
+            message = new debugMessage(E);
+        }
     }
 
     public DcMotor getLeft() {

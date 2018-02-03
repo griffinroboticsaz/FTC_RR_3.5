@@ -20,7 +20,7 @@ import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 @TeleOp(name = "Debugger", group = "OpModes")
 class DebugOp extends OpMode {
 
-    private final CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
+    private CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
 
     private DcMotor left;
     private DcMotor right;
@@ -45,6 +45,8 @@ class DebugOp extends OpMode {
     @Override
     public void init() {
         chwmap.init(hardwareMap);
+        telemetry.addData("", chwmap.message.toString());
+        telemetry.update();
         left = chwmap.getLeft();
         right = chwmap.getRight();
         feederLeft = chwmap.getLeftFeeder();
