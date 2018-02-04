@@ -14,7 +14,7 @@ public class odsColor {
     private static OpticalDistanceSensor colorSensor = chwmap.getColorSensor();
 
 
-    public static double getColorData () {
+    public static double getColorData() {
 
         double maxBrightness = 0;
 
@@ -29,10 +29,7 @@ public class odsColor {
             }
         }
         // compare Brightness to max brightness
-
-
         return maxBrightness;
-
     }
 
 }

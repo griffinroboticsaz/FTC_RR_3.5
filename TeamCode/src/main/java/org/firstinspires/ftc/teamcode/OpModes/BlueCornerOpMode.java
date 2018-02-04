@@ -19,15 +19,16 @@ public class BlueCornerOpMode extends LinearOpMode {
         robot.init(hardwareMap);
         telemetry.addData("Status", "Initialized");
         telemetry.update();
-        robot.getColorServo().setPosition(0.31);
+        //robot.getColorServo().setPosition(0.31); //Can't move during initialization
 
         waitForStart();
 
         MovementLib.lowerCServo();
         sleep(100);
+        double maxScanBrightness = MovementLib.Scan(this);
 
 
-        if (odsColor.getColorData() > 1.5) {
+        if (maxScanBrightness > 1.5) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
             MovementLib.forward(-27, .2, this);

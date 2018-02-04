@@ -106,15 +106,15 @@ public class ManualOpMode extends OpMode {
             armToggleTimer.resetTimer();
         }
 
-        if (gamepad1.a) {
-            armPosition += .01;
-            armMotor.setPosition(armPosition);
-            //openArm = true;
-        } else if(gamepad1.b) {
-            armPosition -= .01;
-            armMotor.setPosition(armPosition);
-            //openArm = false;
-        }
+//        if (gamepad1.a) {
+//            armPosition += .01;
+//            armMotor.setPosition(armPosition);
+//            //openArm = true;
+//        } else if(gamepad1.b) {
+//            armPosition -= .01;
+//            armMotor.setPosition(armPosition);
+//            //openArm = false;
+//        }
         telemetry.addData("Current Arm Position: ", armPosition);
 
 
@@ -132,14 +132,14 @@ public class ManualOpMode extends OpMode {
 
         telemetry.addData("rotation power" , Rotator.getPower());
 
-        if (gamepad1.x) {
-            colorPosition += .01;
-            colorServo.setPosition(colorPosition);
-        } else if (gamepad1.y) {
-            colorPosition -= .01;
-            colorServo.setPosition(colorPosition);
-        }
-        telemetry.addData("Current Arm Position:" , colorPosition);
+//        if (gamepad1.x) {
+//            colorPosition += .01;
+//            colorServo.setPosition(colorPosition);
+//        } else if (gamepad1.y) {
+//            colorPosition -= .01;
+//            colorServo.setPosition(colorPosition);
+//        }
+//        telemetry.addData("Current Arm Position:" , colorPosition);
     }
 
     private double power(Device device){

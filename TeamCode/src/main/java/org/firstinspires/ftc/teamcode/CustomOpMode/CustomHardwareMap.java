@@ -133,7 +133,7 @@ public class CustomHardwareMap {
 
         // Define and initialize ALL installed servos.
         arm = hwMap.get(Servo.class, "arm");
-        arm.setPosition(.8);
+        arm.setPosition(OPEN_ARM_POSITION);
         colorServo.setPosition(COLOR_SERVO_RAISED);
 
 

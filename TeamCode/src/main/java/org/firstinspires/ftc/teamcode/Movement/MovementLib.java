@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.DcMotor;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.SensorUtils.GyroUtils;
+import org.firstinspires.ftc.teamcode.SensorUtils.odsColor;
 
 import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
@@ -53,8 +54,8 @@ public class MovementLib {
      * to ensure the robot does not over-rotate. The rate of deceleration is determined by the derivative of a sin function with the period<p>
      * double the target angle using {@link GyroUtils#calcTurnSpeed(double, double)}. Tbe function (@link GyroUtils#calcAngleTurned(CustomHardwareMap, long)})<p>that controls the deceleration is roughly
      * cos ((90/target) * angleTurned) {@link GyroUtils#calcAngleTurned(CustomHardwareMap, long)}. This also takes a generic "Mode" as an <p>
-     * argument. "Mode" must extend {@link LinearCustomOpMode}. This ensures that whatever OpMode is passed, it with have <p>
-     * the fields from {@link LinearCustomOpMode}.<p>
+     * argument. "Mode" must extend {@link LinearOpMode}. This ensures that whatever OpMode is passed, it with have <p>
+     * the fields from {@link LinearOpMode}.<p>
      * A custom hardware map must be passed ({@link  CustomHardwareMap}) so that the gyro and the driveMotors can be accessed.
      *
      * @param angle  the number of degrees to be turned by the robot
@@ -180,6 +181,21 @@ public class MovementLib {
         }
         ROBOT.getRot().setPower(0);
         ROBOT.getRot().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+    }
+    public static double Scan(LinearOpMode mode) {
+        double currentBrightness;
+        double maxBrightness = 0;
+        for (int i = 0; i < 10; i++) {
+            ROBOT.getColorServo().setPosition(ROBOT.getColorServo().getPosition() - 0.004);
+            mode.sleep(100);
+            mode.telemetry.addData("Color Data", maxBrightness);
+            currentBrightness = odsColor.getColorData();
+            mode.telemetry.update();
+            if (currentBrightness > maxBrightness) {
+                maxBrightness = currentBrightness;
+            }
+        }
+        return maxBrightness;
     }
 
     public static void closeArm() {
