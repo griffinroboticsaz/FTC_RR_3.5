@@ -9,7 +9,7 @@ import org.firstinspires.ftc.teamcode.SensorUtils.odsColor;
 import org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 /**
- * Created by josephodeh and evan on 11/30/17.
+ * Created by josephodeh and evan on 11/30/17
  */
 
 @Autonomous(name = "Red Corner", group = "OpModes")
