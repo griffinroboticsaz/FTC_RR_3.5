@@ -27,14 +27,12 @@ public class TestOpMode extends OpMode{
         int cnumber = colorx.colorNumber();
         telemetry.addData("Colornumber: ",cnumber);
 
-        if (cnumber == 3) {
-            blue = true;
-            telemetry.addData("Blue", blue);
-        }
-        else {
-            blue = false;
-            telemetry.addData("Red", !blue);
+        if (cnumber == 3) blue = true;
+        else if (cnumber == 10) blue = false;
 
-        }
+        telemetry.addData("Blue", blue);
+        telemetry.addData("Red", !blue);
+
+        telemetry.update();
     }
 }
