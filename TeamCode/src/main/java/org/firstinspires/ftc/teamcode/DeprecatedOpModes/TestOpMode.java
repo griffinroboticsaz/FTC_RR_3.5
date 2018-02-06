@@ -18,7 +18,7 @@ public class TestOpMode extends OpMode{
 
     @Override
     public void init() {
-        I2cDevice colori2c = hardwareMap.i2cDevice.get("colorsensorname");
+        I2cDevice colori2c = hardwareMap.i2cDevice.get("colorSensor");
         colorx = new ModernRoboticsI2cColorSensor2(colori2c.getI2cController(), colori2c.getPort());
     }
 
