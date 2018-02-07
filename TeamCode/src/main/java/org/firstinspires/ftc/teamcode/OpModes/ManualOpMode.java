@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode.OpModes;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.I2cDevice;
+import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
@@ -35,12 +37,12 @@ public class ManualOpMode extends OpMode {
     private double liftDirection;
     private double directionDown = 0.2;
     private double directionUp = -0.667;
-    private CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
     private float armPosition = 0.7f;
     private double colorPosition = 0.25;
     private int feederSwitch;
 
 
+    CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
 
     public Timer speedToggleTimer;
     public Timer armToggleTimer;
@@ -59,7 +61,8 @@ public class ManualOpMode extends OpMode {
             leftFeeder = chwMap.getLeftFeeder();
             rightFeeder = chwMap.getRightFeeder();
             colorServo = chwMap.getColorServo();
-            //colorSensor = chwMap.getColorSensor();
+            OpticalDistanceSensor colorSensor = chwMap.getColorSensor();
+            //I2cDevice colorSensor1 = chwMap.getColorSensor1();
             armMotor = chwMap.getArm();
             Rotator = chwMap.getRot();
             rightMotor.setDirection(DcMotor.Direction.FORWARD);
@@ -125,8 +128,8 @@ public class ManualOpMode extends OpMode {
         telemetry.addData("Current Arm Position: ", armPosition);
 
 
-        leftMotor.setPower(-power(Device.LEFTDRIVE));
-        rightMotor.setPower(-power(Device.RIGHTDRIVE));
+        leftMotor.setPower(power(Device.LEFTDRIVE));
+        rightMotor.setPower(power(Device.RIGHTDRIVE));
         leftFeeder.setPower(-power(Device.FEEDERS));
         rightFeeder.setPower(power(Device.FEEDERS) * feederSwitch);
 

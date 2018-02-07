@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 
 import com.qualcomm.robotcore.hardware.I2cDevice;
 
+import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.ModernRoboticsI2cColorSensor2;
 
 /**
@@ -15,11 +16,14 @@ import org.firstinspires.ftc.teamcode.ModernRoboticsI2cColorSensor2;
 public class TestOpMode extends OpMode{
     ModernRoboticsI2cColorSensor2 colorx;
     private boolean blue;
+    CustomHardwareMap chwMap = CustomHardwareMap.getInstance();
+    I2cDevice colorSensor1;
 
     @Override
     public void init() {
-        I2cDevice colori2c = hardwareMap.i2cDevice.get("colorSensor");
-        colorx = new ModernRoboticsI2cColorSensor2(colori2c.getI2cController(), colori2c.getPort());
+        chwMap.init(hardwareMap);
+        colorSensor1 = chwMap.getColorSensor1();
+        colorx = new ModernRoboticsI2cColorSensor2(colorSensor1.getI2cController(), colorSensor1.getPort());
     }
 
     @Override

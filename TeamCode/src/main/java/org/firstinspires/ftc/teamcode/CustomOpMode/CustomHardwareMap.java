@@ -33,9 +33,11 @@ import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import org.firstinspires.ftc.teamcode.ModernRoboticsI2cColorSensor2;
 
 import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
@@ -71,6 +73,8 @@ public class CustomHardwareMap {
 
     public BNO055IMU gyroscope = null;
 
+    public I2cDevice colorSensor1 = null;
+
     public OpticalDistanceSensor colorSensor = null;
 
     public static CustomHardwareMap getInstance() {
@@ -104,6 +108,7 @@ public class CustomHardwareMap {
         colorServo = hwMap.get(Servo.class, "colorServo");
         arm = hwMap.get(Servo.class, "arm");
         rot = hwMap.get(DcMotor.class, "rot");
+        colorSensor1 = hwMap.get(I2cDevice.class,"colorSensor1");
 
        /* BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
         parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES; //changed from radians
@@ -178,4 +183,6 @@ public class CustomHardwareMap {
     public OpticalDistanceSensor getColorSensor() {
         return colorSensor;
     }
+
+    public I2cDevice getColorSensor1() { return colorSensor1; }
 }
