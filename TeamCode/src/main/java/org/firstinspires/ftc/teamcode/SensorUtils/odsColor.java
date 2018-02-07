@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode.SensorUtils;
 
-import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 
@@ -11,7 +11,7 @@ import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 public class odsColor {
     private static CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
 
-    private static OpticalDistanceSensor colorSensor = chwmap.getColorSensor();
+    private static ColorSensor colorSensor = chwmap.getColorSensor();
 
 
     public static double getColorData() {
@@ -22,14 +22,13 @@ public class odsColor {
 
 
         //Get color brightness
-        for (int i = 0; i < 100; i++) {
-            currentBrightness = colorSensor.getRawLightDetected();
-            if (maxBrightness <= currentBrightness){
-                maxBrightness = currentBrightness;
-            }
-        }
-        // compare Brightness to max brightness
+//        for (int i = 0; i < 100; i++) {
+//            currentBrightness = colorSensor.getRawLightDetected();
+//            if (maxBrightness <= currentBrightness){
+//                maxBrightness = currentBrightness;
+//            }
+//        }
+//        // compare Brightness to max brightness
+//        return maxBrightness;
         return maxBrightness;
-    }
-
-}
+    }}
