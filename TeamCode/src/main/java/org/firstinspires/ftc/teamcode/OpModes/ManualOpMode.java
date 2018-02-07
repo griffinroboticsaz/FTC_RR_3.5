@@ -1,7 +1,10 @@
 package org.firstinspires.ftc.teamcode.OpModes;
 
+import android.graphics.Color;
+
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.I2cDevice;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
@@ -61,8 +64,7 @@ public class ManualOpMode extends OpMode {
             leftFeeder = chwMap.getLeftFeeder();
             rightFeeder = chwMap.getRightFeeder();
             colorServo = chwMap.getColorServo();
-            OpticalDistanceSensor colorSensor = chwMap.getColorSensor();
-            //I2cDevice colorSensor1 = chwMap.getColorSensor1();
+            ColorSensor colorSensor = chwMap.getColorSensor();
             armMotor = chwMap.getArm();
             Rotator = chwMap.getRot();
             rightMotor.setDirection(DcMotor.Direction.FORWARD);
