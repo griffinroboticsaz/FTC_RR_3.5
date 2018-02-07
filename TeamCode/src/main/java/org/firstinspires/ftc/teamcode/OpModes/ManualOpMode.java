@@ -147,10 +147,10 @@ public class ManualOpMode extends OpMode {
 
     private double power(Device device){
         switch (device){
-            case LEFTDRIVE: return ((-gamepad1.left_stick_y - gamepad1.left_stick_x)) * speedMultiplyer;
-            case RIGHTDRIVE: return ((-gamepad1.left_stick_y + gamepad1.left_stick_x)) * speedMultiplyer;
+            case LEFTDRIVE: return ((-gamepad1.left_stick_y + gamepad1.left_stick_x)) * speedMultiplyer; // changed the direction on these
+            case RIGHTDRIVE: return ((-gamepad1.left_stick_y - gamepad1.left_stick_x)) * speedMultiplyer; //2/6/18
             case FEEDERS: return (gamepad1.right_trigger - gamepad1.left_trigger);
-            case ROTATOR: return -gamepad1.right_stick_y;
+            case ROTATOR: return -gamepad1.right_stick_y*.8;
             default: throw new IllegalArgumentException("There is no such motor!");
         }
     }

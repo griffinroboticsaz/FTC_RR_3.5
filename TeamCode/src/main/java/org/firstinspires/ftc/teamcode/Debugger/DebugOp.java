@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.Debugger;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
 import com.qualcomm.robotcore.hardware.Servo;
@@ -33,7 +34,7 @@ public class DebugOp extends OpMode {
     Servo colorServo;
     Servo armServo;
 
-    OpticalDistanceSensor colorSensor;
+    ColorSensor colorSensor;
 
     double cServoPos = COLOR_SERVO_RAISED;
     double armServoPos = OPEN_ARM_POSITION;
