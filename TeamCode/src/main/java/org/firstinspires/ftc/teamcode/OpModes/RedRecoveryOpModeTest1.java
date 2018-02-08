@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 import org.firstinspires.ftc.teamcode.SensorUtils.odsColor;
-import org.firstinspires.ftc.teamcode.Movement.Constants.
+import org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 @Autonomous(name = "Red Recovery Test 1", group = "OpModes")
 public class RedRecoveryOpModeTest1 extends LinearOpMode {
