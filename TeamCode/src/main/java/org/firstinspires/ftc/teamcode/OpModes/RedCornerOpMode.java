@@ -28,7 +28,6 @@ CustomHardwareMap robot = CustomHardwareMap.getInstance();
 
         MovementLib.lowerCServo();
         sleep(100);
-        double maxScanBrightness = MovementLib.Scan(this);
 
 //        double result = 0;
 //        for (int i = 0; i < 50 ; i++) {
@@ -39,17 +38,18 @@ CustomHardwareMap robot = CustomHardwareMap.getInstance();
 //            telemetry.update();
 //            result += rColor - bColor;
 
+        boolean isRed = MovementLib.scanRed(this);
 
-        if (maxScanBrightness >= 1.5) {
+
+        if (isRed) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(21, .2, this);
-
+            MovementLib.forward(-27, .2, this);
         }
         else {
             MovementLib.forward(-3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(27, .2, this);
+            MovementLib.forward(-21, .2, this);
         }
 
         try {

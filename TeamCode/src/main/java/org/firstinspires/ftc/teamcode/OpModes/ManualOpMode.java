@@ -92,7 +92,7 @@ public class ManualOpMode extends OpMode {
         speedToggleTimer.updateDeltaTime();
         armToggleTimer.updateDeltaTime();
 
-        if (gamepad1.left_stick_button && speedToggleTimer.getDeltaTime() >= 200) {
+        if (gamepad1.left_stick_button && speedToggleTimer.getDeltaTime() >= 350) {
             if (highspeed) {
                 highspeed = false;
             } else {

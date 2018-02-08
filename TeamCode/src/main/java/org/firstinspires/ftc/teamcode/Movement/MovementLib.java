@@ -2,7 +2,9 @@ package org.firstinspires.ftc.teamcode.Movement;
 
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.SensorUtils.GyroUtils;
@@ -144,11 +146,15 @@ public class MovementLib {
 
         leftMotor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
 
-        if(Math.abs(degrees) == degrees){
-            leftMotor.setTargetPosition(counts);
-        } else {
-            leftMotor.setTargetPosition(-counts );
-        }
+//        if(Math.abs(degrees) == degrees){
+//            leftMotor.setTargetPosition(counts);
+//        } else {
+//            leftMotor.setTargetPosition(-counts );
+//        }
+
+        leftMotor.setTargetPosition(counts);
+        if(Math.abs(degrees) == degrees)
+            leftMotor.setDirection(DcMotor.Direction.REVERSE);
 
 
         //Step Four: Tell Motors to get to position
@@ -164,6 +170,8 @@ public class MovementLib {
         }
 
         leftMotor.setPower(0);
+        leftMotor.setDirection(DcMotor.Direction.FORWARD);
+
 
     }
     public static void rotateArm(double angle, double speed, LinearOpMode mode) {
@@ -182,20 +190,34 @@ public class MovementLib {
         ROBOT.getRot().setPower(0);
         ROBOT.getRot().setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
     }
-    public static double Scan(LinearOpMode mode) {
-        double currentBrightness;
-        double maxBrightness = 0;
-        for (int i = 0; i < 10; i++) {
-            ROBOT.getColorServo().setPosition(ROBOT.getColorServo().getPosition() - 0.004);
-            mode.sleep(100);
-            mode.telemetry.addData("Color Data", maxBrightness);
-            currentBrightness = odsColor.getColorData();
-            mode.telemetry.update();
-            if (currentBrightness > maxBrightness) {
-                maxBrightness = currentBrightness;
-            }
+//
+//    public static double Scan(LinearOpMode mode) {
+//        double currentBrightness;
+//        double maxBrightness = 0;
+//        for (int i = 0; i < 10; i++) {
+//            ROBOT.getColorServo().setPosition(ROBOT.getColorServo().getPosition() - 0.004);
+//            mode.sleep(100);
+//            mode.telemetry.addData("Color Data", maxBrightness);
+//            currentBrightness = odsColor.getColorData();
+//            mode.telemetry.update();
+//            if (currentBrightness > maxBrightness) {
+//                maxBrightness = currentBrightness;
+//            }
+//        }
+//        return maxBrightness;
+//    }
+
+    public static boolean scanRed(LinearOpMode mode){
+        Timer scanTimer = new Timer();
+        ColorSensor colorSensor = ROBOT.getColorSensor();
+        int redColor = 0;
+        for(int i = 0; i < 20; i++) {
+            mode.sleep(25);
+            redColor += colorSensor.red();
+            redColor -= colorSensor.blue();
         }
-        return maxBrightness;
+        return redColor > 0;
+
     }
 
     public static void closeArm() {

@@ -25,10 +25,10 @@ public class BlueCornerOpMode extends LinearOpMode {
 
         MovementLib.lowerCServo();
         sleep(100);
-        double maxScanBrightness = MovementLib.Scan(this);
+        boolean isRed = MovementLib.scanRed(this);
 
 
-        if (maxScanBrightness > 1.5) {
+        if (!isRed) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
             MovementLib.forward(-27, .2, this);
@@ -38,7 +38,7 @@ public class BlueCornerOpMode extends LinearOpMode {
             MovementLib.raiseCServo();
             MovementLib.forward(-21, .2, this);
         }
-
+//
 //        if (result/50 > 0) {
 //            MovementLib.forward(3, .2, this);
 //            MovementLib.raiseCServo();
