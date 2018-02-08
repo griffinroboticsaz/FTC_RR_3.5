@@ -42,19 +42,19 @@ CustomHardwareMap robot = CustomHardwareMap.getInstance();
         if (isRed) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(29, .2, this);
+            MovementLib.forward(26, .2, this);
         }
         else {
             MovementLib.forward(-3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(35, .2, this);
+            MovementLib.forward(32, .2, this);
         }
 
         try {
             MovementLib.rotateRobot(-90, 52.43, .75, this);
-            MovementLib.rotateArm(-25, .1, this);
+            MovementLib.rotateArm(25, .1, this);
             MovementLib.openArm();
-            MovementLib.rotateArm(32, .1, this);
+            MovementLib.rotateArm(-32, .1, this);
             MovementLib.closeArm();
             MovementLib.rotateArm(215, .1, this);   //change signs
             MovementLib.openArm();

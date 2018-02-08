@@ -1,6 +1,7 @@
-package org.firstinspires.ftc.teamcode.OpModes;
+package org.firstinspires.ftc.teamcode.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
@@ -37,12 +38,12 @@ public class RedRecoveryOpModeTest7 extends LinearOpMode {
         if (isRed) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(29, .2, this);
+            MovementLib.forward(25, .2, this);
         }
         else {
             MovementLib.forward(-3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(35, .2, this);
+            MovementLib.forward(31, .2, this);
         }
 
         try {

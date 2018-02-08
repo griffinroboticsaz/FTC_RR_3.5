@@ -1,4 +1,4 @@
-package org.firstinspires.ftc.teamcode.OpModes;
+package org.firstinspires.ftc.teamcode.Tests;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
@@ -6,8 +6,8 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import org.firstinspires.ftc.teamcode.CustomOpMode.CustomHardwareMap;
 import org.firstinspires.ftc.teamcode.Movement.MovementLib;
 
-@Autonomous(name = "Red Recovery Test 3", group = "OpModes")
-public class RedRecoveryOpModeTest3 extends LinearOpMode {
+@Autonomous(name = "Red Recovery Test 2", group = "OpModes")
+public class RedRecoveryOpModeTest2 extends LinearOpMode {
     CustomHardwareMap robot = CustomHardwareMap.getInstance();
     @Override
     public void runOpMode() {
@@ -37,12 +37,12 @@ public class RedRecoveryOpModeTest3 extends LinearOpMode {
         if (isRed) {
             MovementLib.forward(3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(29, .2, this);
+            MovementLib.forward(23, .2, this);
         }
         else {
             MovementLib.forward(-3, .2, this);
             MovementLib.raiseCServo();
-            MovementLib.forward(35, .2, this);
+            MovementLib.forward(29, .2, this);
         }
 
         try {
