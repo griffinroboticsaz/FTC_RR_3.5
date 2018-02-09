@@ -55,13 +55,12 @@ public class RedRecoveryOpModeTest8 extends LinearOpMode {
             MovementLib.rotateArm(215, .1, this);   //change signs
             MovementLib.openArm();
             sleep(500);
-            MovementLib.rotateArm(-60, .1, this);
+            MovementLib.rotateArm(-90, .1, this);
 //            MovementLib.closeArm();
 //            MovementLib.rotateArm(110, .1, this);
 //            sleep(500);
 //            MovementLib.forward(15, .2, this);
-//            MovementLib.forward(-3, .2, this);
-
+            MovementLib.forward(-5, .2, this);
         } catch (NullPointerException NPE) {
             telemetry.addData("Error", NPE.getMessage());
             telemetry.update();

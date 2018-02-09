@@ -6,6 +6,7 @@ package org.firstinspires.ftc.teamcode.Debugger;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.OpticalDistanceSensor;
@@ -17,7 +18,7 @@ import org.firstinspires.ftc.teamcode.Movement.Timer;
 import static org.firstinspires.ftc.teamcode.Movement.Constants.*;
 
 
-@Autonomous(name = "Debugger", group = "OpModes")
+@TeleOp(name = "Debugger", group = "OpModes")
 public class DebugOp extends OpMode {
 
     CustomHardwareMap chwmap = CustomHardwareMap.getInstance();
